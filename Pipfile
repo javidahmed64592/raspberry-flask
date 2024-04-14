@@ -4,7 +4,8 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-
+flask = "*"
+"rpi.gpio" = "*"
 
 [dev-packages]
 isort = "*"
@@ -14,3 +15,6 @@ mypy = "*"
 
 [requires]
 python_version = "3.11"
+
+[scripts]
+app = "flask --app src.main run --host=0.0.0.0"
