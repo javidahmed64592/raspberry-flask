@@ -12,13 +12,13 @@ def create_response(response: dict) -> Response:
     return jsonify({"response": response})
 
 
+def cleanup():
+    rpi_controller._cleanup()
+
+
 @app.route("/health")
 def health() -> Response:
     return create_response({"status": "healthy"})
-
-
-def cleanup():
-    rpi_controller._cleanup()
 
 
 @app.route("/board_mode")
@@ -32,12 +32,12 @@ def set_board_mode(mode: str):
     return create_response({"message": f"Setting board mode to '{mode}'..."})
 
 
-@app.route("pin/<int:pin>")
+@app.route("/pin/<int:pin>")
 def get_pin(pin: int):
     return create_response({"message": f"Pin '{pin}' mode: '{rpi_controller._pins[pin]}'"})
 
 
-@app.route("pin/<int:pin>/output/<string:val>")
+@app.route("/pin/<int:pin>/output/<string:val>")
 def set_pin(pin: int, val: str):
     val = {"off": "high", "on": "low"}[val]
 
