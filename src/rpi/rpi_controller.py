@@ -46,7 +46,9 @@ class RPiController:
 
     def _output_pin(self, pin_number: int, value: str) -> None:
         print_system_msg(f"Setting pin '{pin_number}' to '{value}'...")
-        GPIO.output(pin_number, self.VALUES[value])
+        val = self.VALUES[value]
+        GPIO.output(pin_number, val)
+        self._pins[pin_number] = val
 
     def _check_pin(self, pin_number: int):
         return pin_number in self._pins.keys()
